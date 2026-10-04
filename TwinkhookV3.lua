@@ -1,5 +1,5 @@
 local Translations = {
-    ["Twinkhook"] = "msTwinkhookV3",
+    ["Twinkhook"] = "Twinkhook",
     ["Toggle"] = "开关", ["Lock"] = "锁定", ["Unlock"] = "解锁",
     ["Enabled"] = "开启", ["Disabled"] = "关闭",
     ["On"] = "开", ["Off"] = "关",
@@ -66,7 +66,7 @@ local Translations = {
     ["Speed Bypass: off"] = "速度绕过：关", ["Noclip Bypass: off"] = "穿墙绕过：关",
     ["Anti-Cheat Bypass"] = "反作弊绕过", ["Speed Bypass"] = "速度绕过",
     ["Noclip Bypass"] = "穿墙绕过", ["Crouch Spoof"] = "蹲下伪装",
-    ["Anti-Cheat Manipulation"] = "反作弊操控(只支持矿山/档案室/楼梯间)", ["Position Manipulation"] = "位置操控(无敌模式)",
+    ["Anti-Cheat Manipulation"] = "反作弊操控", ["Position Manipulation"] = "位置操控(无敌模式)",
     ["Position Manipulation Range"] = "位置操控范围", ["No Roblox Void"] = "无 Roblox 虚空",
     ["Speed Modifier"] = "速度修改", ["Walk Speed"] = "行走速度",
     ["Ladder Boost"] = "梯子加速", ["No Acceleration"] = "无加速度",
