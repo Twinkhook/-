@@ -1,5 +1,5 @@
 local Translations = {
-    ["Twinkhook"] = "Twinkhook『汉化』V2",
+    ["Twinkhook"] = "Twinkhook『汉化』V3",
     ["Toggle"] = "开关",
     ["Lock"] = "锁定",
     ["Unlock"] = "解锁",
@@ -48,7 +48,7 @@ local Translations = {
     ["Anti Noise"] = "防噪音",
     ["Auto Break Noise TV"] = "自动破坏噪音电视",
     ["Auto Look At Creak"] = "自动看 Creak",
-    ["Auto Smash Stem"] = "自动砸茎干",
+    ["Auto Smash Stem"] = "自动砸 Stem",
     ["Crusher"] = "粉碎机",
     ["Anti Crusher"] = "防粉碎机",
     ["Auto Look At Creaking"] = "自动看 Creaking",
@@ -133,7 +133,7 @@ local Translations = {
     ["Anti-Cheat Bypass: not this floor"] = "反作弊绕过：当前楼层不可用",
     ["Speed Bypass: off"] = "速度绕过：关",
     ["Noclip Bypass: off"] = "穿墙绕过：关",
-    ["Anti-Cheat Bypass"] = "反作弊绕过(只能支持，档案室，楼梯间，矿山)",
+    ["Anti-Cheat Bypass"] = "反作弊绕过",
     ["Speed Bypass"] = "速度绕过",
     ["Noclip Bypass"] = "穿墙绕过",
     ["Crouch Spoof"] = "蹲下伪装",
@@ -429,8 +429,8 @@ local Translations = {
     ["Kill Part"] = "秒杀部件",
     ["Knockbomb"] = "击退炸弹",
     ["Pool Shock"] = "水池电击",
-    ["Seek Arm"] = "Seek 手臂",
-    ["Snare"] = "陷阱",
+    ["Seek Arm"] = "Seek Arm",
+    ["Snare"] = "Snare",
     ["Vacuum Room"] = "真空房间",
     ["Banana Peel"] = "香蕉皮",
     ["Chandelier Obstruction"] = "吊灯障碍",
@@ -510,16 +510,17 @@ local Translations = {
     ["Alarm Clock"] = "闹钟",
     ["Spotlight"] = "聚光灯",
 
+    -- 实体名（保持英文）
     ["Screech"] = "Screech",
-    ["Scribbles"] = "涂鸦",
+    ["Scribbles"] = "Scribbles",
     ["Seek"] = "Seek",
-    ["Stem"] = "茎干",
+    ["Stem"] = "Stem",
     ["Surge"] = "Surge",
     ["Teller"] = "Teller",
     ["Timothy"] = "Timothy",
-    ["World Lotus"] = "世界莲花",
+    ["World Lotus"] = "World Lotus",
     ["Gloombat"] = "Gloombat",
-    ["Gloombat Swarm"] = "Gloombat 群",
+    ["Gloombat Swarm"] = "Gloombat Swarm",
     ["Grampy"] = "Grampy",
     ["Groundskeeper"] = "Groundskeeper",
     ["Grumble"] = "Grumble",
@@ -527,26 +528,26 @@ local Translations = {
     ["Haste"] = "Haste",
     ["Hijack"] = "Hijack",
     ["Honcho"] = "Honcho",
-    ["Drones"] = "无人机",
-    ["Eyes"] = "眼睛",
+    ["Drones"] = "Drones",
+    ["Eyes"] = "Eyes",
     ["Eyestalk"] = "Eyestalk",
     ["Figure"] = "Figure",
-    ["Fire Arm"] = "火焰手臂",
-    ["Firedamp"] = "沼气",
+    ["Fire Arm"] = "Fire Arm",
+    ["Firedamp"] = "Firedamp",
     ["Giggle"] = "Giggle",
     ["Glitch"] = "Glitch",
     ["Ransom"] = "Ransom",
     ["Rush"] = "Rush",
     ["Sally"] = "Sally",
-    ["Jeff The Killer"] = "Jeff the Killer",
+    ["Jeff The Killer"] = "Jeff The Killer",
     ["Lookman"] = "Lookman",
     ["Louie"] = "Louie",
     ["Mandrake"] = "Mandrake",
     ["Monument"] = "Monument",
     ["Noise"] = "Noise",
-    ["Noise Television"] = "噪音电视",
-    ["Portrait"] = "肖像",
-    ["Queen Grumble"] = "Grumble 女王",
+    ["Noise Television"] = "Noise Television",
+    ["Portrait"] = "Portrait",
+    ["Queen Grumble"] = "Queen Grumble",
     ["Alma"] = "Alma",
     ["Ambush"] = "Ambush",
     ["Bash"] = "Bash",
@@ -554,7 +555,7 @@ local Translations = {
     ["Bramble"] = "Bramble",
     ["Creak"] = "Creak",
     ["Dread"] = "Dread",
-    ["Drone Stampede"] = "无人机冲撞",
+    ["Drone Stampede"] = "Drone Stampede",
 }
 
 local function translateText(text)
@@ -679,7 +680,7 @@ task.wait(2)
 setupTranslationEngine()
 
 local success, err = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sillyleo67/doors/refs/heads/main/Twinkhook.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sillyleo67/Doors/refs/heads/main/Twinkhook.lua"))()
 end)
 
 if not success then
