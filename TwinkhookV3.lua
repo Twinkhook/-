@@ -63,6 +63,8 @@ local Translations = {
     ["Abraham Hat"] = "Abraham 帽子",
     ["Large Screw"] = "大螺丝",
     ["Gate Lever"] = "大门拉杆",
+    ["Terminal"] = "终端",
+    ["Depot"] = "仓库",
     ["Anything that appears on more than one floor is in General."] = "出现在多个楼层的功能都在「通用」里。",
     ["Anti-Cheat Bypass: not this floor"] = "反作弊绕过：当前楼层不可用",
     ["Speed Bypass: off"] = "速度绕过：关", ["Noclip Bypass: off"] = "穿墙绕过：关",
