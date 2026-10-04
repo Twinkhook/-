@@ -1,5 +1,5 @@
 local Translations = {
-    ["Twinkhook"] = "Twinkhook",
+    ["Twinkhook"] = "Twinkhook V3",
     ["Toggle"] = "开关", ["Lock"] = "锁定", ["Unlock"] = "解锁",
     ["Enabled"] = "开启", ["Disabled"] = "关闭",
     ["On"] = "开", ["Off"] = "关",
@@ -61,6 +61,7 @@ local Translations = {
     ["Fire Alarm"] = "火警",
     ["Abraham Hat"] = "Abraham 帽子",
     ["Large Screw"] = "大螺丝",
+    ["Gate Lever"] = "大门拉杆",
     ["Anything that appears on more than one floor is in General."] = "出现在多个楼层的功能都在「通用」里。",
     ["Anti-Cheat Bypass: not this floor"] = "反作弊绕过：当前楼层不可用",
     ["Speed Bypass: off"] = "速度绕过：关", ["Noclip Bypass: off"] = "穿墙绕过：关",
