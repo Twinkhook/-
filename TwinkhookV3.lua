@@ -1,6 +1,6 @@
 local Translations = {
     ["Twinkhook V3"] = "Twinkhook V3",
-    ["Twinkhook"] = "----Twinkhook",
+    ["Twinkhook"] = "----Twinkhook V3",
     ["Toggle"] = "开关", ["Lock"] = "锁定", ["Unlock"] = "解锁",
     ["Enabled"] = "开启", ["Disabled"] = "关闭",
     ["On"] = "开", ["Off"] = "关",
@@ -350,5 +350,3 @@ task.spawn(function()
         pcall(processContainer, container)
     end
 end)
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sillyleo67/doors/refs/heads/main/Twinkhook.lua"))()
