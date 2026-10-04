@@ -245,22 +245,110 @@ local Translations = {
     ["Hint Paper"] = "提示纸", ["Shears"] = "剪刀", ["Skeleton Key"] = "万能钥匙",
     ["Smoothie"] = "冰沙", ["Aloe Vera"] = "芦荟", ["Alarm Clock"] = "闹钟",
     ["Spotlight"] = "聚光灯",
-    ["Screech"] = "尖啸", ["Scribbles"] = "涂鸦", ["Seek"] = "寻找者",
-    ["Stem"] = "茎", ["Surge"] = "电涌", ["Teller"] = "柜员",
+    ["Screech"] = "尖啸", ["Scribbles"] = "涂鸦", ["Seek"] = "追寻者",
+    ["Stem"] = "茎", ["Surge"] = "闪电", ["Teller"] = "柜员",
     ["Timothy"] = "提摩太", ["World Lotus"] = "世界莲花",
     ["Gloombat"] = "幽暗蝙蝠", ["Gloombat Swarm"] = "幽暗蝙蝠群",
     ["Grampy"] = "爷爷", ["Groundskeeper"] = "园丁",
     ["Grumble"] = "咕哝", ["Halt"] = "停止者", ["Haste"] = "急速",
     ["Hijack"] = "劫持", ["Honcho"] = "头目", ["Drones"] = "无人机",
-    ["Eyes"] = "眼睛", ["Eyestalk"] = "白桦木眼睛seek", ["Figure"] = "飞哥",
+    ["Eyes"] = "眼睛", ["Eyestalk"] = "眼柄", ["Figure"] = "人影",
     ["Fire Arm"] = "火臂", ["Firedamp"] = "沼气", ["Giggle"] = "咯咯笑",
-    ["Glitch"] = "故障", ["Ransom"] = "赎金", ["Rush"] = "冲刺",
+    ["Glitch"] = "故障", ["Ransom"] = "赎金", ["Rush"] = "冲刺者",
     ["Sally"] = "莎莉", ["Jeff The Killer"] = "杀手杰夫",
     ["Lookman"] = "人影", ["Louie"] = "老鼠洞", ["Mandrake"] = "曼德拉草",
     ["Monument"] = "纪念碑", ["Noise"] = "噪音",
     ["Noise Television"] = "噪音电视", ["Portrait"] = "肖像",
-    ["Queen Grumble"] = "女王", ["Alma"] = "阿尔玛",
+    ["Queen Grumble"] = "咕哝女王", ["Alma"] = "阿尔玛",
     ["Ambush"] = "伏击者", ["Bash"] = "猛击", ["Blitz"] = "闪击",
-    ["Bramble"] = "地刺", ["Creak"] = "吱嘎", ["Dread"] = "恐惧",
-    ["Drone Stampede"] = "Dron时间踩踏",
+    ["Bramble"] = "地刺", ["Creak"] = "吱嘎怪", ["Dread"] = "恐惧",
+    ["Drone Stampede"] = "Drone踩踏",
 }
+
+local sortedKeys = {}
+for en, cn in pairs(Translations) do
+    table.insert(sortedKeys, {en = en, cn = cn})
+end
+table.sort(sortedKeys, function(a, b) return #a.en > #b.en end)
+
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+
+    local doorsNum = text:match("^Doors%s+(%d+)$")
+    if doorsNum then return "门 " .. doorsNum end
+    local doorNum = text:match("^Door%s+(%d+)$")
+    if doorNum then return "门 " .. doorNum end
+    if text == "Key" or text:match("^Key%s*%[") then
+        return (text:gsub("^Key", "钥匙"))
+    end
+
+    local dist = text:match("^%s*%[%s*(%d+)m%s*%]%s*$")
+    if dist then return "[ " .. dist .. "米 ]" end
+
+    if Translations[text] then return Translations[text] end
+
+    for _, pair in ipairs(sortedKeys) do
+        if text:find(pair.en, 1, true) then
+            local newText = text:gsub(pair.en:gsub("(%W)", "%%%1"), pair.cn)
+            if newText ~= text and newText:find(pair.en, 1, true) then
+                return text
+            end
+            return newText
+        end
+    end
+    return text
+end
+
+local function getContainers()
+    local list = {}
+    local ok, hui = pcall(function() return gethui() end)
+    if ok and hui then table.insert(list, hui) end
+    pcall(function() table.insert(list, game:GetService("CoreGui")) end)
+    pcall(function()
+        local p = game:GetService("Players").LocalPlayer
+        if p and p:FindFirstChild("PlayerGui") then table.insert(list, p.PlayerGui) end
+    end)
+    pcall(function() table.insert(list, game:GetService("Workspace")) end)
+    return list
+end
+
+local function translateOne(gui)
+    if not gui:IsA("TextLabel") and not gui:IsA("TextButton") and not gui:IsA("TextBox") then return end
+    local t = gui.Text
+    if t and t ~= "" then
+        local nt = translateText(t)
+        if nt ~= t then gui.Text = nt end
+    end
+end
+
+local function bindTextChange(gui)
+    if not gui:IsA("TextLabel") and not gui:IsA("TextButton") and not gui:IsA("TextBox") then return end
+    gui:GetPropertyChangedSignal("Text"):Connect(function()
+        local t = gui.Text
+        if t and t ~= "" then
+            local nt = translateText(t)
+            if nt ~= t then gui.Text = nt end
+        end
+    end)
+end
+
+local function processContainer(container)
+    for _, gui in ipairs(container:GetDescendants()) do
+        translateOne(gui)
+        bindTextChange(gui)
+    end
+    container.DescendantAdded:Connect(function(desc)
+        task.wait(0.05)
+        translateOne(desc)
+        bindTextChange(desc)
+    end)
+end
+
+task.spawn(function()
+    task.wait(2)
+    for _, container in ipairs(getContainers()) do
+        pcall(processContainer, container)
+    end
+end)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sillyleo67/doors/refs/heads/main/Twinkhook.lua"))()
