@@ -1,5 +1,6 @@
 local Translations = {
-    ["Twinkhook"] = "Twinkhook V3",
+    ["Twinkhook V3"] = "Twinkhook V3",
+    ["Twinkhook"] = "Twinkhook",
     ["Toggle"] = "开关", ["Lock"] = "锁定", ["Unlock"] = "解锁",
     ["Enabled"] = "开启", ["Disabled"] = "关闭",
     ["On"] = "开", ["Off"] = "关",
@@ -272,7 +273,11 @@ local function translateText(text)
 
     for _, pair in ipairs(sortedKeys) do
         if text:find(pair.en, 1, true) then
-            return text:gsub(pair.en:gsub("(%W)", "%%%1"), pair.cn)
+            local newText = text:gsub(pair.en:gsub("(%W)", "%%%1"), pair.cn)
+            if newText ~= text and newText:find(pair.en, 1, true) then
+                return text
+            end
+            return newText
         end
     end
     return text
