@@ -51,6 +51,7 @@ local Translations = {
     ["Chest"] = "箱子", ["Chests"] = "箱子", ["Cobbler Shop"] = "鞋匠商店",
     ["Crate"] = "箱子", ["Crates"] = "箱子",
     ["Drawers"] = "抽屉", ["Dropped Items"] = "掉落物品", ["Fuses"] = "保险丝",
+    ["Fuse"] = "保险丝",
     ["Furniture"] = "家具", ["Keys"] = "钥匙", ["Levers"] = "拉杆",
     ["Light Sources"] = "光源", ["Lockpick Door"] = "开锁器门",
     ["Lockpick Other"] = "开锁器其他", ["Locks"] = "锁", ["Paintings"] = "画作",
@@ -59,6 +60,10 @@ local Translations = {
     ["Ladder"] = "梯子", ["Ladders"] = "梯子",
     ["Water Mine"] = "水雷", ["Sea Mine"] = "水雷", ["Mine"] = "水雷",
     ["Generator"] = "发电机", ["Gate Button"] = "大门按钮",
+    ["Pump"] = "水泵",
+    ["Pumps"] = "水泵",
+    ["Valve"] = "阀门",
+    ["Valves"] = "阀门",
     ["Fire Alarm"] = "火警",
     ["Abraham Hat"] = "Abraham 帽子",
     ["Large Screw"] = "大螺丝",
@@ -272,8 +277,9 @@ local function translateText(text)
     if text == "Key" or text:match("^Key%s*%[") then
         return (text:gsub("^Key", "钥匙"))
     end
-    local dist = text:match("^%[(%d+)m%]$")
-    if dist then return "[" .. dist .. "米]" end
+
+    local dist = text:match("^%s*%[%s*(%d+)m%s*%]%s*$")
+    if dist then return "[ " .. dist .. "米 ]" end
 
     if Translations[text] then return Translations[text] end
 
