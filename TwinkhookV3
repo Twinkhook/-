@@ -1,5 +1,5 @@
 local Translations = {
-    ["Twinkhook"] = "Twinkhook『汉化』V3",
+    ["Twinkhook"] = "Twinkhook『汉化』",
     ["Toggle"] = "开关",
     ["Lock"] = "锁定",
     ["Unlock"] = "解锁",
@@ -42,8 +42,10 @@ local Translations = {
     ["Server"] = "服务器",
     ["Audio"] = "音频",
     ["Movement"] = "移动",
+    ["Puzzles"] = "解谜",
+    ["Minigames"] = "小游戏",
+    ["Trolling"] = "整蛊",
 
-    -- 楼梯间页
     ["Auto Pull Fire Alarms"] = "自动拉火警",
     ["Anti Noise"] = "防噪音",
     ["Auto Break Noise TV"] = "自动破坏噪音电视",
@@ -54,13 +56,9 @@ local Translations = {
     ["Auto Look At Creaking"] = "自动看 Creaking",
     ["Auto Deposit Items"] = "自动存物品",
     ["Auto Unscrew Vents"] = "自动拧开通风口",
-    ["Puzzles"] = "解谜",
     ["Auto Emergency Terminal Door"] = "自动紧急终端门",
-
-    -- 户外页
     ["Auto Look At Monument"] = "自动看 Monument",
 
-    -- 设置页
     ["Menu"] = "菜单",
     ["Keybind Menu"] = "按键菜单",
     ["Show Watermark"] = "显示水印",
@@ -70,6 +68,7 @@ local Translations = {
     ["Notification Sound"] = "通知音效",
     ["Script"] = "脚本",
     ["Execute On Teleport"] = "传送时执行",
+    ["Execute On Server Hop"] = "换服时执行",
     ["Panic"] = "紧急停止",
     ["Unload"] = "卸载",
     ["Configuration"] = "配置",
@@ -94,14 +93,13 @@ local Translations = {
     ["Delete theme"] = "删除主题",
     ["Set as default"] = "设为默认",
     ["Reset default"] = "重置默认",
-    ["Current default theme: none"] = "当前默认主题：无",
+    ["Current default theme: Default"] = "当前默认主题：默认",
     ["Theme JSON"] = "主题 JSON",
     ["Import theme"] = "导入主题",
     ["Export current theme"] = "导出当前主题",
     ["Right"] = "右",
     ["Left"] = "左",
 
-    -- 交互页 / 忽略列表
     ["Ignore List"] = "忽略列表",
     ["Ignore Items"] = "忽略物品",
     ["Notifications are turned on in the Settings tab."] = "通知已在「设置」标签中开启。",
@@ -129,7 +127,6 @@ local Translations = {
 
     ["Anything that appears on more than one floor is in General."] = "出现在多个楼层的功能都在「通用」里。",
 
-    -- 绕过区完整词条
     ["Anti-Cheat Bypass: not this floor"] = "反作弊绕过：当前楼层不可用",
     ["Speed Bypass: off"] = "速度绕过：关",
     ["Noclip Bypass: off"] = "穿墙绕过：关",
@@ -154,7 +151,7 @@ local Translations = {
     ["Noclip"] = "穿墙",
     ["Fly"] = "飞行",
     ["Fly Speed"] = "飞行速度",
-    ["Auto Interact"] = "自动交互(这玩意儿有bug没用)",
+    ["Auto Interact"] = "自动交互",
     ["Interact Ignore"] = "交互忽略",
     ["Custom Interact Range"] = "自定义交互距离",
     ["Interact Range"] = "交互距离",
@@ -174,7 +171,6 @@ local Translations = {
     ["Sound Volume"] = "音量",
     ["Notification Time"] = "通知时长",
 
-    -- 提醒 / 聊天页
     ["Entity Spawns"] = "实体生成",
     ["Item Spawns"] = "物品生成",
     ["Chat Entity Spawns"] = "聊天实体生成",
@@ -307,6 +303,7 @@ local Translations = {
     ["Anti Eyes"] = "防 Eyes",
     ["Anti Snare"] = "防 Snare",
     ["Anti Figure Hearing"] = "防 Figure 听觉",
+    ["Anti Kill Bricks"] = "防秒杀砖",
     ["Infinite Items"] = "无限物品",
     ["Infinite Item List"] = "无限物品列表",
     ["Fast Throw"] = "快速投掷",
@@ -314,6 +311,7 @@ local Translations = {
     ["Spam Other Tools"] = "刷其他工具",
     ["Auto Breaker Box"] = "自动电闸盒",
     ["Breaker Mode"] = "电闸模式",
+    ["Legit"] = "正常",
     ["Instant"] = "瞬间",
     ["Auto Padlock"] = "自动挂锁",
     ["Padlock Reach"] = "挂锁交互距离",
@@ -350,7 +348,7 @@ local Translations = {
     ["Retro"] = "复古",
     ["Fools"] = "愚人",
     ["There is no anti cheat in this version."] = "此版本没有反作弊。",
-    ["Remove Seek Trigger"] = "移除 Seek 触发器",
+    ["Delete Seek Trigger"] = "删除 Seek 触发器",
     ["Remove Basement Gate"] = "移除地下室大门",
     ["Remove Paintings Door"] = "移除画门",
     ["Remove Skeleton Door"] = "移除骷髅门",
@@ -368,6 +366,7 @@ local Translations = {
     ["Show Path"] = "显示路径",
     ["Revives"] = "复活",
     ["Infinite Revives"] = "无限复活",
+    ["Only works in Old Hotel and Fools."] = "仅在旧酒店和愚人层生效。",
 
     ["Game"] = "游戏",
     ["Game:"] = "游戏：",
@@ -419,6 +418,11 @@ local Translations = {
     ["Outline color"] = "描边颜色",
     ["Font color"] = "字体颜色",
     ["Contrast check: good (17.6:1)"] = "对比度检查：良好 (17.6:1)",
+    ["Font Face"] = "字体",
+    ["Code"] = "Code",
+    ["Background Image"] = "背景图片",
+    ["Theme list"] = "主题列表",
+    ["Default"] = "默认",
     ["name..."] = "名称...",
     ["paste a code..."] = "粘贴代码...",
     ["coming soon"] = "即将推出",
@@ -510,7 +514,6 @@ local Translations = {
     ["Alarm Clock"] = "闹钟",
     ["Spotlight"] = "聚光灯",
 
-    -- 实体名（保持英文）
     ["Screech"] = "Screech",
     ["Scribbles"] = "Scribbles",
     ["Seek"] = "Seek",
@@ -680,7 +683,7 @@ task.wait(2)
 setupTranslationEngine()
 
 local success, err = pcall(function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sillyleo67/Doors/refs/heads/main/Twinkhook.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sillyleo67/doors/refs/heads/main/Twinkhook.lua"))()
 end)
 
 if not success then
