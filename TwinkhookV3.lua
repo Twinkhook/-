@@ -1,5 +1,5 @@
 local Translations = {
-    ["Twinkhook"] = "Twinkhook",
+    ["Twinkhook"] = "ms TwinkhookV3",
     ["Toggle"] = "开关", ["Lock"] = "锁定", ["Unlock"] = "解锁",
     ["Enabled"] = "开启", ["Disabled"] = "关闭",
     ["On"] = "开", ["Off"] = "关",
@@ -58,12 +58,15 @@ local Translations = {
     ["Ladder"] = "梯子", ["Ladders"] = "梯子",
     ["Water Mine"] = "水雷", ["Sea Mine"] = "水雷", ["Mine"] = "水雷",
     ["Generator"] = "发电机", ["Gate Button"] = "大门按钮",
+    ["Fire Alarm"] = "火警",
+    ["Abraham Hat"] = "Abraham 帽子",
+    ["Large Screw"] = "大螺丝",
     ["Anything that appears on more than one floor is in General."] = "出现在多个楼层的功能都在「通用」里。",
     ["Anti-Cheat Bypass: not this floor"] = "反作弊绕过：当前楼层不可用",
     ["Speed Bypass: off"] = "速度绕过：关", ["Noclip Bypass: off"] = "穿墙绕过：关",
     ["Anti-Cheat Bypass"] = "反作弊绕过", ["Speed Bypass"] = "速度绕过",
     ["Noclip Bypass"] = "穿墙绕过", ["Crouch Spoof"] = "蹲下伪装",
-    ["Anti-Cheat Manipulation"] = "反作弊操控", ["Position Manipulation"] = "位置操控(无敌模式)",
+    ["Anti-Cheat Manipulation"] = "反作弊操控(只支持矿山/档案室/楼梯间)", ["Position Manipulation"] = "位置操控(无敌模式)",
     ["Position Manipulation Range"] = "位置操控范围", ["No Roblox Void"] = "无 Roblox 虚空",
     ["Speed Modifier"] = "速度修改", ["Walk Speed"] = "行走速度",
     ["Ladder Boost"] = "梯子加速", ["No Acceleration"] = "无加速度",
@@ -283,46 +286,35 @@ local function getContainers()
         local p = game:GetService("Players").LocalPlayer
         if p and p:FindFirstChild("PlayerGui") then table.insert(list, p.PlayerGui) end
     end)
+    pcall(function() table.insert(list, game:GetService("Workspace")) end)
     return list
 end
 
--- 只翻一个 TextLabel
 local function translateOne(gui)
-    if not gui:IsA("TextLabel") and not gui:IsA("TextButton") and not gui:IsA("TextBox") then
-        return
-    end
+    if not gui:IsA("TextLabel") and not gui:IsA("TextButton") and not gui:IsA("TextBox") then return end
     local t = gui.Text
     if t and t ~= "" then
         local nt = translateText(t)
-        if nt ~= t then
-            gui.Text = nt
-        end
+        if nt ~= t then gui.Text = nt end
     end
 end
 
--- 监听 Text 变化
 local function bindTextChange(gui)
-    if not gui:IsA("TextLabel") and not gui:IsA("TextButton") and not gui:IsA("TextBox") then
-        return
-    end
+    if not gui:IsA("TextLabel") and not gui:IsA("TextButton") and not gui:IsA("TextBox") then return end
     gui:GetPropertyChangedSignal("Text"):Connect(function()
         local t = gui.Text
         if t and t ~= "" then
             local nt = translateText(t)
-            if nt ~= t then
-                gui.Text = nt
-            end
+            if nt ~= t then gui.Text = nt end
         end
     end)
 end
 
--- 处理一个容器：先翻全部，再监听新增
 local function processContainer(container)
     for _, gui in ipairs(container:GetDescendants()) do
         translateOne(gui)
         bindTextChange(gui)
     end
-
     container.DescendantAdded:Connect(function(desc)
         task.wait(0.05)
         translateOne(desc)
