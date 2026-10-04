@@ -1,6 +1,6 @@
 local Translations = {
     ["Twinkhook V3"] = "Twinkhook V3",
-    ["Twinkhook"] = "----Twinkhook V3",
+    ["Twinkhook"] = "----Twinkhook",
     ["Toggle"] = "开关", ["Lock"] = "锁定", ["Unlock"] = "解锁",
     ["Enabled"] = "开启", ["Disabled"] = "关闭",
     ["On"] = "开", ["Off"] = "关",
@@ -264,3 +264,91 @@ local Translations = {
     ["Bramble"] = "Bramble", ["Creak"] = "Creak", ["Dread"] = "Dread",
     ["Drone Stampede"] = "Drone Stampede",
 }
+
+local sortedKeys = {}
+for en, cn in pairs(Translations) do
+    table.insert(sortedKeys, {en = en, cn = cn})
+end
+table.sort(sortedKeys, function(a, b) return #a.en > #b.en end)
+
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+
+    local doorsNum = text:match("^Doors%s+(%d+)$")
+    if doorsNum then return "门 " .. doorsNum end
+    local doorNum = text:match("^Door%s+(%d+)$")
+    if doorNum then return "门 " .. doorNum end
+    if text == "Key" or text:match("^Key%s*%[") then
+        return (text:gsub("^Key", "钥匙"))
+    end
+
+    local dist = text:match("^%s*%[%s*(%d+)m%s*%]%s*$")
+    if dist then return "[ " .. dist .. "米 ]" end
+
+    if Translations[text] then return Translations[text] end
+
+    for _, pair in ipairs(sortedKeys) do
+        if text:find(pair.en, 1, true) then
+            local newText = text:gsub(pair.en:gsub("(%W)", "%%%1"), pair.cn)
+            if newText ~= text and newText:find(pair.en, 1, true) then
+                return text
+            end
+            return newText
+        end
+    end
+    return text
+end
+
+local function getContainers()
+    local list = {}
+    local ok, hui = pcall(function() return gethui() end)
+    if ok and hui then table.insert(list, hui) end
+    pcall(function() table.insert(list, game:GetService("CoreGui")) end)
+    pcall(function()
+        local p = game:GetService("Players").LocalPlayer
+        if p and p:FindFirstChild("PlayerGui") then table.insert(list, p.PlayerGui) end
+    end)
+    pcall(function() table.insert(list, game:GetService("Workspace")) end)
+    return list
+end
+
+local function translateOne(gui)
+    if not gui:IsA("TextLabel") and not gui:IsA("TextButton") and not gui:IsA("TextBox") then return end
+    local t = gui.Text
+    if t and t ~= "" then
+        local nt = translateText(t)
+        if nt ~= t then gui.Text = nt end
+    end
+end
+
+local function bindTextChange(gui)
+    if not gui:IsA("TextLabel") and not gui:IsA("TextButton") and not gui:IsA("TextBox") then return end
+    gui:GetPropertyChangedSignal("Text"):Connect(function()
+        local t = gui.Text
+        if t and t ~= "" then
+            local nt = translateText(t)
+            if nt ~= t then gui.Text = nt end
+        end
+    end)
+end
+
+local function processContainer(container)
+    for _, gui in ipairs(container:GetDescendants()) do
+        translateOne(gui)
+        bindTextChange(gui)
+    end
+    container.DescendantAdded:Connect(function(desc)
+        task.wait(0.05)
+        translateOne(desc)
+        bindTextChange(desc)
+    end)
+end
+
+task.spawn(function()
+    task.wait(2)
+    for _, container in ipairs(getContainers()) do
+        pcall(processContainer, container)
+    end
+end)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sillyleo67/doors/refs/heads/main/Twinkhook.lua"))()
